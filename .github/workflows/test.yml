@@ -1,4 +1,4 @@
-name: Railway AJAX Request
+name: Availability API Test
 
 on:
   workflow_dispatch:
@@ -8,12 +8,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Get AJAX request
+      - name: Test availability
         run: |
-          curl -L -sS \
-            "https://indianrail.gov.in/enquiry/js/SeatAvailability.js?version=9" \
-            -o SeatAvailability.js
+          curl -sS --max-time 20 \
+            "https://indian-railway-api.onrender.com/api/availability?train=17256&from=BMT&to=GNT&date=2026-09-26&class=SL" \
+            -o response.json
 
-          echo "=== AJAX REQUEST ==="
-
-          sed -n '585,625p' SeatAvailability.js
+          echo "=== RESPONSE ==="
+          cat response.json
