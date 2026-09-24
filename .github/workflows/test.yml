@@ -1,4 +1,4 @@
-name: Railway Request Parameters
+name: Railway AJAX Request
 
 on:
   workflow_dispatch:
@@ -8,12 +8,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Download Railway JavaScript
+      - name: Get AJAX request
         run: |
           curl -L -sS \
             "https://indianrail.gov.in/enquiry/js/SeatAvailability.js?version=9" \
             -o SeatAvailability.js
 
-          echo "=== COMMON CAPTCHA REQUEST ==="
+          echo "=== AJAX REQUEST ==="
 
-          sed -n '580,730p' SeatAvailability.js
+          sed -n '585,625p' SeatAvailability.js
