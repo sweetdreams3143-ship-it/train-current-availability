@@ -1,4 +1,4 @@
-name: Telegram Test
+name: Railway Availability Test
 
 on:
   workflow_dispatch:
@@ -8,12 +8,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Send Telegram notification
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.RS_TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      - name: Test Indian Railways website
         run: |
-          curl -sS -X POST \
-            "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
-            -d "chat_id=${TELEGRAM_CHAT_ID}" \
-            --data-urlencode "text=🚆 Train Availability Monitor✅ Test notification successful!Our free automation setup is working."
+          echo "Testing Indian Railways availability page..."
+
+          curl -L -sS \
+            "https://indianrail.gov.in/enquiry/SEAT/SeatAvailability.html?locale=en" \
+            -o railway.html
+
+          echo "Railway page downloaded."
+
+          grep -i "Accommodation Availability" railway.html | head -5
