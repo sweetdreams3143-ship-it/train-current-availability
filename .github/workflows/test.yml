@@ -1,4 +1,4 @@
-name: Railway JS Test
+name: Railway API Details
 
 on:
   workflow_dispatch:
@@ -14,5 +14,8 @@ jobs:
             "https://indianrail.gov.in/enquiry/js/SeatAvailability.js?version=9" \
             -o SeatAvailability.js
 
-          echo "=== SEAT AVAILABILITY JS ==="
-          cat SeatAvailability.js
+          echo "=== REQUEST DETAILS ==="
+
+          grep -inE \
+            "ajax|url:|type:|method:|data:|POST|GET|captcha|trainNo|sourceStation|destinationStation" \
+            SeatAvailability.js | head -120
