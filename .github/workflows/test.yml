@@ -1,4 +1,4 @@
-name: Railway Availability Test
+name: Railway Form Test
 
 on:
   workflow_dispatch:
@@ -8,14 +8,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Test Indian Railways website
+      - name: Download Railway page
         run: |
-          echo "Testing Indian Railways availability page..."
-
           curl -L -sS \
             "https://indianrail.gov.in/enquiry/SEAT/SeatAvailability.html?locale=en" \
             -o railway.html
 
-          echo "Railway page downloaded."
-
-          grep -i "Accommodation Availability" railway.html | head -5
+          echo "=== FORM DETAILS ==="
+          grep -iE '<form|<input|<select|<option' railway.html | head -100
