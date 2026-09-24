@@ -1,4 +1,4 @@
-name: Railway API Details
+name: Railway Request Parameters
 
 on:
   workflow_dispatch:
@@ -14,8 +14,6 @@ jobs:
             "https://indianrail.gov.in/enquiry/js/SeatAvailability.js?version=9" \
             -o SeatAvailability.js
 
-          echo "=== REQUEST DETAILS ==="
+          echo "=== COMMON CAPTCHA REQUEST ==="
 
-          grep -inE \
-            "ajax|url:|type:|method:|data:|POST|GET|captcha|trainNo|sourceStation|destinationStation" \
-            SeatAvailability.js | head -120
+          sed -n '580,730p' SeatAvailability.js
