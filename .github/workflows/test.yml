@@ -1,4 +1,4 @@
-name: Railway Form Test
+name: Railway Form Details
 
 on:
   workflow_dispatch:
@@ -14,5 +14,6 @@ jobs:
             "https://indianrail.gov.in/enquiry/SEAT/SeatAvailability.html?locale=en" \
             -o railway.html
 
-          echo "=== FORM DETAILS ==="
-          grep -iE '<form|<input|<select|<option' railway.html | head -100
+          echo "=== JAVASCRIPT / FORM SUBMIT DETAILS ==="
+
+          grep -inE "captcha|seatavail|availability|ajax|submit|formData|api" railway.html | head -150
