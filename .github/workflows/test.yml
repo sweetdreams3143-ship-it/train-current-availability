@@ -1,4 +1,4 @@
-name: Railway Form Details
+name: Railway JS Test
 
 on:
   workflow_dispatch:
@@ -8,12 +8,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Download Railway page
+      - name: Download Railway JavaScript
         run: |
           curl -L -sS \
-            "https://indianrail.gov.in/enquiry/SEAT/SeatAvailability.html?locale=en" \
-            -o railway.html
+            "https://indianrail.gov.in/enquiry/js/SeatAvailability.js?version=9" \
+            -o SeatAvailability.js
 
-          echo "=== JAVASCRIPT / FORM SUBMIT DETAILS ==="
-
-          grep -inE "captcha|seatavail|availability|ajax|submit|formData|api" railway.html | head -150
+          echo "=== SEAT AVAILABILITY JS ==="
+          cat SeatAvailability.js
